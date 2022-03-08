@@ -1,0 +1,13 @@
+version: '3'
+services:
+  webserver:
+    build:
+      dockerfile: requirements/nginx
+    image: nginx:alpine
+    container_name: nginx
+    restart: always
+    ports:
+      - 80:80
+      # - 443:443
+    # volumes:
+    #   - ./requirements/nginx/conf:etc/nginx/conf.d:ro
