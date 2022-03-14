@@ -8,3 +8,7 @@ https://www.cyberciti.biz/faq/how-to-install-nginx-web-server-on-alpine-linux/
 https://www.cyberciti.biz/faq/how-to-install-letsencrypt-free-ssltls-for-nginx-certificate-on-alpine-linux/
 
 https://www.cyberciti.biz/faq/how-to-install-openssh-server-on-alpine-linux-including-docker/
+
+Autofill command cat "input.txt" | ./Script.sh
+https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-nginx-on-centos-7
+https://www.grottedubarbu.fr/docker-nginx-reverse-proxy/
