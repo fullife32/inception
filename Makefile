@@ -21,7 +21,7 @@ down:
 	sudo docker-compose -f ./srcs/docker-compose.yml down
 
 prune:
-	sudo docker system prune -af
+	sudo docker system prune -af --volumes
 
 re:	down all
 
