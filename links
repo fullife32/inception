@@ -12,3 +12,7 @@ https://www.cyberciti.biz/faq/how-to-install-openssh-server-on-alpine-linux-incl
 Autofill command cat "input.txt" | ./Script.sh
 https://www.digitalocean.com/community/tutorials/how-to-create-a-self-signed-ssl-certificate-for-nginx-on-centos-7
 https://www.grottedubarbu.fr/docker-nginx-reverse-proxy/
+
+https://medium.com/swlh/wordpress-deployment-with-nginx-php-fpm-and-mariadb-using-docker-compose-55f59e5c1a
+
+https://github.com/federico-razzoli/docker-mariadb-alpine/blob/master/Dockerfile
