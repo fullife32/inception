@@ -19,8 +19,8 @@ RUN rm /etc/mysql/mariadb.conf.d/50-server.cnf
 COPY ./conf/50-server.cnf /etc/mysql/mariadb.conf.d
 RUN mysql_install_db
 RUN service mysql start
-RUN mariadb < /setup.sql
-RUN service mysql stop
+# RUN mariadb < /setup.sql
+# RUN service mysql stop
 
 # RUN mkdir -p /run/openrc
 # RUN touch /run/openrc/softlevel
@@ -30,6 +30,9 @@ RUN service mysql stop
 # COPY ./conf/* /etc/mysql
 
 # VOLUMES
+
+env work on run but not on build, run $ENV in entrypoint
+
 # VOLUME /var/lib/mysql
 
 # EXPOSING PORTS
@@ -38,4 +41,4 @@ EXPOSE 3306
 # DAEMON
 # CMD ["nginx", "-g", "daemon off;"]
 # ENTRYPOINT ["/usr/bin/mysqld_safe"]
-ENTRYPOINT ["/usr/bin/mysqld"]
+# ENTRYPOINT ["/usr/bin/mysqld_safe"]

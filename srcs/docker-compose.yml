@@ -49,6 +49,7 @@ services:
       - .env
   nginx:
     build: requirements/nginx/
+    # entrypoint: 
     container_name: nginx
     restart: always
     ports:
@@ -61,6 +62,7 @@ services:
       - back
     env_file:
       - .env
+    # depends_on:
 
 volumes:
   database:
