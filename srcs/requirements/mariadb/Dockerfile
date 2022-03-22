@@ -3,7 +3,7 @@ FROM debian:buster
 LABEL maintainer="eassouli <eassouli@student.42.fr>"
 
 # INSTALLING DEPENDANCIES
-RUN apt-get update && apt-get install mariadb-server nginx -y
+RUN apt-get update && apt-get install mariadb-server -y
 # openrc nginx
 
 # MYSQL SETUP
@@ -14,11 +14,12 @@ RUN apt-get update && apt-get install mariadb-server nginx -y
 # RUN chown -R mysql:mysql /var/log/mysql
 
 # MARIADB SETUP
-COPY ./conf/setup.sql /
-RUN rm /etc/mysql/mariadb.conf.d/50-server.cnf
-COPY ./conf/50-server.cnf /etc/mysql/mariadb.conf.d
-RUN mysql_install_db
-RUN service mysql start
+COPY ./conf/setup.sql /setup.sql
+COPY ./tools/entrypoint.sh /entrypoint.sh
+# RUN rm /etc/mysql/mariadb.conf.d/50-server.cnf
+# COPY ./conf/50-server.cnf /etc/mysql/mariadb.conf.d
+# RUN mysql_install_db
+# RUN service mysql start
 # RUN mariadb < /setup.sql
 # RUN service mysql stop
 
@@ -30,15 +31,13 @@ RUN service mysql start
 # COPY ./conf/* /etc/mysql
 
 # VOLUMES
+VOLUME /var/lib/mysql
 
-env work on run but not on build, run $ENV in entrypoint
-
-# VOLUME /var/lib/mysql
+# env work on run but not on build, run $ENV in entrypoint
 
 # EXPOSING PORTS
 EXPOSE 3306
 
 # DAEMON
 # CMD ["nginx", "-g", "daemon off;"]
-# ENTRYPOINT ["/usr/bin/mysqld_safe"]
 # ENTRYPOINT ["/usr/bin/mysqld_safe"]

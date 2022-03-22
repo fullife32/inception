@@ -6,13 +6,13 @@
 #    By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/17 18:23:50 by eassouli          #+#    #+#              #
-#    Updated: 2022/03/18 14:51:43 by eassouli         ###   ########.fr        #
+#    Updated: 2022/03/22 18:02:45 by eassouli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 all:
 	sudo docker-compose -f ./srcs/docker-compose.yml up --build
-# -d
+# -d to detach
 down:
 	sudo docker-compose -f ./srcs/docker-compose.yml down
 

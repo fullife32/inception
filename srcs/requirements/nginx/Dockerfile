@@ -3,21 +3,12 @@ FROM debian:buster
 LABEL maintainer="eassouli <eassouli@student.42.fr>"
 
 # INSTALLING DEPENDANCIES
-RUN apt-get update && apt-get install nginx openssl -y
-# openssl
+RUN apt-get update && apt-get install nginx openssl gettext -y
 
 # COPY NECESSARY FILES
-# COPY ./conf/nginx.conf /etc/nginx/nginx.conf
 COPY ./conf/input-ssl.txt /input-ssl.txt
-
-# SSL/TLS CONFIG
-RUN mkdir -p /etc/ssl/private
-RUN chmod 700 /etc/ssl/private
-RUN cat "/input-ssl.txt" | openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/ssl/private/nginx-selfsigned.key -out /etc/ssl/certs/nginx-selfsigned.crt
+COPY ./tools/entrypoint.sh /entrypoint.sh
 
 # EXPOSING PORTS
 EXPOSE 80
 EXPOSE 443
-
-# DAEMON
-CMD ["nginx", "-g", "daemon off;"]
