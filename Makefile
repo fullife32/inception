@@ -6,7 +6,7 @@
 #    By: eassouli <eassouli@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/17 18:23:50 by eassouli          #+#    #+#              #
-#    Updated: 2022/03/22 18:02:45 by eassouli         ###   ########.fr        #
+#    Updated: 2022/03/23 17:50:04 by eassouli         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ clean: down
 	sudo docker system prune -af --volumes
 
 fclean: clean
-	sudo docker volume rm srcs_database srcs_wordpress
+	sudo docker volume rm srcs_database srcs_wordpress_data
 
 re:	down all
 
