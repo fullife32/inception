@@ -15,7 +15,7 @@ RUN apt-get update && apt-get install mariadb-server -y
 
 # MARIADB SETUP
 COPY ./conf/setup.sql /setup.sql
-COPY ./tools/entrypoint.sh /entrypoint.sh
+COPY ./tools/* /
 # RUN rm /etc/mysql/mariadb.conf.d/50-server.cnf
 # COPY ./conf/50-server.cnf /etc/mysql/mariadb.conf.d
 # RUN mysql_install_db

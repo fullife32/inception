@@ -6,10 +6,10 @@ LABEL maintainer="eassouli <eassouli@student.42.fr>"
 RUN apt-get update && apt-get install wget php-fpm php-mysql php-mbstring -y
 
 # COPY NECESSARY FILES
-COPY ./tools/entrypoint.sh /entrypoint.sh
+COPY ./tools/* /
 
 # SET VOLUME
-VOLUME /var/www/
+VOLUME /var/www/wordpress
 
 RUN wget https://files.phpmyadmin.net/phpMyAdmin/5.1.3/phpMyAdmin-5.1.3-all-languages.tar.gz \
 	&& mkdir -p /var/www/phpmyadmin \

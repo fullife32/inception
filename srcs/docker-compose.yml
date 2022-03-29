@@ -1,102 +1,66 @@
-# version: '3'
-# services:
-#   webserver:
-#     build:
-#       dockerfile: requirements/nginx/Dockerfile
-#     image: nginx:alpine
-#     container_name: nginx
-#     restart: always
-#     ports:
-#       - 80:80
-      # - 443:443
-    # volumes:
-    #   - ./requirements/nginx/conf:etc/nginx/conf.d:ro
-# version: "3.9"
-# services:
-#   nginx:
-#     build: requirements/nginx/
-#     # image: nginx:latest
-#     container_name: nginx
-#     restart: always
-#     ports:
-#     - 80:80
-#     - 443:443
-    # expose:
-    #   - 443
-    # volumes:
-    # - ./requirements/nginx/conf/nginx.conf:/etc/nginx/nginx.conf
-    # - ./requirements/nginx/conf/ssl:/ssl/
-    # environment:
-    # - NGINX_HOST=eassouli.42.fr
-    # - NGINX_PORT=80
-    # env_file:
-      # - .env
-
 version: "3.9"
 services:
-  database:
-    container_name: database
+  mariadb:
+    container_name: mariadb
+    image: mariadb
     build: requirements/mariadb
     entrypoint: /entrypoint.sh
-    restart: always
-    ports:
-      - 3306:3306
+    restart: on-failure
     volumes:
       - database:/var/lib/mysql
     networks:
-      - vpcbr
+      - inception
     env_file:
       - .env
 
   wordpress:
     container_name: wordpress
     depends_on:
-      - database
+      - mariadb
+    image: wordpress
     build: requirements/wordpress
     entrypoint: /entrypoint.sh
-    restart: always
+    restart: on-failure
     volumes:
-      - wordpress_data:/var/www/html
-    ports:
-     - 9000:9000
+      - wordpress_db:/var/www/wordpress
     networks:
-      - vpcbr
+      - inception
     env_file:
       - .env
-    # secrets:
 
   nginx:
     container_name: nginx
     depends_on:
       - wordpress
+    image: nginx
     build: requirements/nginx/
     entrypoint: /entrypoint.sh
-    restart: always
+    restart: on-failure
     volumes:
-      - ./requirements/nginx/conf/nginx.conf:/etc/nginx/nginx.conf
-      - wordpress_data:/var/www/html
+      - ./requirements/nginx/conf/wordpress.conf:/etc/nginx/conf.d/wordpress.conf
+      - wordpress_db:/var/www/wordpress
     ports:
-      - 80:80
       - 443:443
-    # networks:
-    #   - custom-driver-1
+    networks:
+      - inception
     env_file:
       - .env
 
 volumes:
   database:
+    name: database
     driver: local
     driver_opts:
-      type: none
+      type: volume
       o: bind
       device: /home/eithan/data/database
-  wordpress_data:
+  wordpress_db:
+    name: wordpress_db
     driver: local
     driver_opts:
-      type: none
+      type: volume
       o: bind
-      device: /home/eithan/data/wordpress
+      device: /home/eithan/data/wordpress_db
 
 networks:
-  vpcbr:
-    driver: bridge
+  inception:
