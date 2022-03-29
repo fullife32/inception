@@ -23,12 +23,12 @@ down:
 # ----------------- #
 
 clean: down
-	sudo docker volume rm srcs_database srcs_wordpress_db
-	rm -rf /home/eithan/data/wordpress_db
-	rm -rf /home/eithan/data/database
+	sudo docker volume prune -f
+	sudo rm -rf /home/eithan/data/wordpress_db
+	sudo rm -rf /home/eithan/data/database
 
 fclean: clean
-	sudo docker system prune -af --volumes
+	sudo docker system prune -af
 
 re:	down all
 

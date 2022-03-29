@@ -37,7 +37,7 @@ services:
     entrypoint: /entrypoint.sh
     restart: on-failure
     volumes:
-      - ./requirements/nginx/conf/wordpress.conf:/etc/nginx/conf.d/wordpress.conf
+      # - ./requirements/nginx/conf/wordpress.conf:/etc/nginx/conf.d/wordpress.conf
       - wordpress_db:/var/www/wordpress
     ports:
       - 443:443
