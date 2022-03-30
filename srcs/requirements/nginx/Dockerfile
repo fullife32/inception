@@ -10,8 +10,7 @@ RUN apt-get update && apt-get install nginx openssl -y
 
 # COPY NECESSARY FILES
 COPY ./tools/* /
-COPY ./conf/wordpress.conf /etc/nginx/conf.d/
+COPY ./conf/nginx.conf /etc/nginx/conf.d/wordpress.conf
 
 # EXPOSING PORTS
-# EXPOSE 80
 EXPOSE 443
