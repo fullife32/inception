@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # SSL/TLS Config
 mkdir -p /etc/ssl/private

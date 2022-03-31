@@ -3,7 +3,7 @@ FROM debian:buster
 LABEL maintainer="eassouli <eassouli@student.42.fr>"
 
 # INSTALLING DEPENDANCIES
-RUN apt-get update && apt-get install mariadb-server -y
+RUN apt-get update && apt-get install mariadb-server procps -y
 # openrc nginx
 
 # MYSQL SETUP
@@ -15,6 +15,7 @@ RUN apt-get update && apt-get install mariadb-server -y
 
 # MARIADB SETUP
 COPY ./tools/* /
+COPY ./conf/* /
 # RUN rm /etc/mysql/mariadb.conf.d/50-server.cnf
 # COPY ./conf/50-server.cnf /etc/mysql/mariadb.conf.d
 # RUN mysql_install_db
