@@ -1,8 +1,8 @@
 #!/bin/bash
 
+mysql_install_db
 service mysql start
 sleep 5
-mysql_install_db
 
 mysql -e "SET PASSWORD FOR 'root'@'localhost' = PASSWORD('${MYSQL_ROOT_PASSWORD}');"
 mysql -uroot -p${MYSQL_ROOT_PASSWORD} -e "CREATE DATABASE ${MYSQL_DATABASE};"
@@ -12,4 +12,4 @@ mysql -uroot -p${MYSQL_ROOT_PASSWORD} -e "FLUSH PRIVILEGES;"
 
 service mysql stop
 # mysqld
-mysqld_safe
+/usr/bin/mysqld_safe
