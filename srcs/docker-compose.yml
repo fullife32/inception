@@ -7,7 +7,7 @@ services:
     entrypoint: /entrypoint.sh
     restart: on-failure
     volumes:
-      - database:/var/lib/mysql
+      - wordpress_database:/var/lib/mysql
     networks:
       - inception
     env_file:
@@ -22,7 +22,7 @@ services:
     entrypoint: /entrypoint.sh
     restart: on-failure
     volumes:
-      - wordpress_db:/var/www/wordpress
+      - wordpress_website:/var/www/wordpress
     networks:
       - inception
     env_file:
@@ -37,7 +37,7 @@ services:
     entrypoint: /entrypoint.sh
     restart: on-failure
     volumes:
-      - wordpress_db:/var/www/wordpress
+      - wordpress_website:/var/www/wordpress
     ports:
       - 443:443
     networks:
@@ -46,20 +46,20 @@ services:
       - .env
 
 volumes:
-  database:
-    name: database
+  wordpress_database:
+    name: wordpress_database
     driver: local
     driver_opts:
       type: volume
       o: bind
-      device: /home/eithan/data/database
-  wordpress_db:
-    name: wordpress_db
+      device: /home/eithan/data/wordpress_database
+  wordpress_website:
+    name: wordpress_website
     driver: local
     driver_opts:
       type: volume
       o: bind
-      device: /home/eithan/data/wordpress_db
+      device: /home/eithan/data/wordpress_website
 
 networks:
   inception:

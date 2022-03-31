@@ -8,6 +8,7 @@ RUN apt-get update && apt-get install wget php php-fpm php-mysqli php-mbstring -
 # COPY NECESSARY FILES
 # COPY ./conf/wp-config.php /var/www/wordpress/
 COPY ./tools/* /
+COPY ./conf/wp-config.php /var/www/wordpress/
 
 RUN wget https://wordpress.org/wordpress-5.9.2.tar.gz \
 	&& mkdir -p /var/www/wordpress \
@@ -18,9 +19,9 @@ RUN wget https://wordpress.org/wordpress-5.9.2.tar.gz \
 # SET VOLUME
 VOLUME /var/www/wordpress
 
-# RUN chown -R www-data:www-data /var/www/wordpress/
+RUN chown -R www-data:www-data /var/www/wordpress/
 RUN mkdir -p /run/php/
-# RUN echo "listen = 9000" >> /etc/php/7.3/fpm/pool.d/www.conf
+RUN echo "listen = 9000" >> /etc/php/7.3/fpm/pool.d/www.conf
 
 # EXPOSING PORTS
 EXPOSE 9000

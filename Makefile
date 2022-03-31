@@ -11,8 +11,8 @@
 # **************************************************************************** #
 
 all:
-	mkdir -p /home/eithan/data/wordpress_db
-	mkdir -p /home/eithan/data/database
+	mkdir -p /home/eithan/data/wordpress_website
+	mkdir -p /home/eithan/data/wordpress_database
 	sudo docker-compose -f ./srcs/docker-compose.yml up --build
 # -d to detach
 down:
@@ -24,8 +24,8 @@ down:
 
 clean: down
 	sudo docker volume prune -f
-	sudo rm -rf /home/eithan/data/wordpress_db
-	sudo rm -rf /home/eithan/data/database
+	sudo rm -rf /home/eithan/data/wordpress_website
+	sudo rm -rf /home/eithan/data/wordpress_database
 
 fclean: clean
 	sudo docker system prune -af
