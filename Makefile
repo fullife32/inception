@@ -30,6 +30,6 @@ clean: down
 fclean: clean
 	sudo docker system prune -af
 
-re:	down all
+re:	clean all
 
 .PHONY: all down clean fclean re

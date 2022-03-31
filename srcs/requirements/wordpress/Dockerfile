@@ -6,6 +6,7 @@ LABEL maintainer="eassouli <eassouli@student.42.fr>"
 RUN apt-get update && apt-get install wget php php-fpm php-mysqli php-mbstring -y
 
 # COPY NECESSARY FILES
+# COPY ./conf/wp-config.php /var/www/wordpress/
 COPY ./tools/* /
 
 RUN wget https://wordpress.org/wordpress-5.9.2.tar.gz \
@@ -18,7 +19,7 @@ RUN wget https://wordpress.org/wordpress-5.9.2.tar.gz \
 VOLUME /var/www/wordpress
 
 # RUN chown -R www-data:www-data /var/www/wordpress/
-# RUN mkdir -p /run/php/
+RUN mkdir -p /run/php/
 # RUN echo "listen = 9000" >> /etc/php/7.3/fpm/pool.d/www.conf
 
 # EXPOSING PORTS
