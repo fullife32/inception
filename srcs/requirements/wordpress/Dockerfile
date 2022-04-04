@@ -12,14 +12,14 @@ COPY ./tools/* /
 # COPY ./conf/wp-config.php /var/www/wordpress/
 
 # DOWNLOADING WORDPRESS
-# RUN wget https://wordpress.org/wordpress-5.9.2.tar.gz \
-# 	&& mkdir -p /var/www/wordpress \
-# 	&& tar xzf /wordpress-5.9.2.tar.gz --strip-components=1 -C /var/www/wordpress/ \
-# 	&& rm -rf /wordpress-5.9.2.tar.gz \
-# 	&& chmod -R 777 /var/www/wordpress
-
-RUN mkdir -p /var/www/wordpress \
+RUN wget https://wordpress.org/wordpress-5.9.2.tar.gz \
+	&& mkdir -p /var/www/wordpress \
+	&& tar xzf /wordpress-5.9.2.tar.gz --strip-components=1 -C /var/www/wordpress/ \
+	&& rm -rf /wordpress-5.9.2.tar.gz \
 	&& chmod -R 777 /var/www/wordpress
+
+# RUN mkdir -p /var/www/wordpress \
+	# && chmod -R 777 /var/www/wordpress
 COPY ./conf/wp-config.php /var/www/wordpress/
 
 # SET VOLUME

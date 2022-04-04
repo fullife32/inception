@@ -3,7 +3,7 @@ services:
   mariadb:
     container_name: mariadb
     image: mariadb
-    build: requirements/mariadb
+    build: requirements/mariadb/
     entrypoint: /entrypoint.sh
     restart: on-failure
     volumes:
@@ -18,7 +18,7 @@ services:
     depends_on:
       - mariadb
     image: wordpress
-    build: requirements/wordpress
+    build: requirements/wordpress/
     entrypoint: /entrypoint.sh
     restart: on-failure
     volumes:
