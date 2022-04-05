@@ -17,6 +17,7 @@ all:
 # -d to detach
 down:
 	sudo docker-compose -f ./srcs/docker-compose.yml down
+# Need to rework here to delete virtual volumes and check curl 443 vm fix ?
 
 # ----------------- #
 #       CLEAN       #
