@@ -16,7 +16,7 @@ all:
 	sudo docker-compose -f ./srcs/docker-compose.yml up --build
 # -d to detach
 down:
-	sudo docker-compose -f ./srcs/docker-compose.yml down --volumes
+	sudo docker-compose -f ./srcs/docker-compose.yml down
 
 # ----------------- #
 #       CLEAN       #

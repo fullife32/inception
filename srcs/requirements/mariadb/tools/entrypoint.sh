@@ -1,25 +1,34 @@
 #!/bin/sh
 
 # First config
-mysql_install_db
+# mysql_install_db
 
-# Config db and admin user
+# Starting mysql
 service mysql start
-sleep 3
-# mysql -uroot -e "SET PASSWORD FOR 'root'@'localhost' = PASSWORD('$MYSQL_ROOT_PASSWORD');"
-# mysql -uroot -p$MYSQL_ROOT_PASSWORD < /setup.sql
-# mysql -uroot -e "CREATE DATABASE IF NOT EXISTS ${MYSQL_DATABASE};"
-# mysql -uroot -e "CREATE USER IF NOT EXISTS ${MYSQL_USER}@'localhost' IDENTIFIED BY '${MYSQL_PASSWORD}';"
-# mysql -uroot -e "GRANT ALL PRIVILEGES ON ${MYSQL_USER}.* TO ${MYSQL_USER}@'localhost';"
-# mysql -uroot -e "FLUSH PRIVILEGES;"
-# mysql -uroot -p$MYSQL_ROOT_PASSWORD -e "exit;"
+sleep 2
 
-mysql -uroot -e "CREATE DATABASE IF NOT EXISTS wordpress;"
-mysql -uroot -e "CREATE USER IF NOT EXISTS 'wordpress'@'localhost' IDENTIFIED BY 'wordpress';"
-mysql -uroot -e "GRANT ALL PRIVILEGES ON wordpress.* TO 'wordpress'@'localhost';"
+# Creating database and add an admin user and a user
+mysql -uroot -e "CREATE DATABASE IF NOT EXISTS $MYSQL_DATABASE;"
+mysql -uroot -e "CREATE USER IF NOT EXISTS '$MYSQL_ADMIN_USER'@'%' IDENTIFIED BY '$MYSQL_ADMIN_PASSWORD';"
+mysql -uroot -e "CREATE USER IF NOT EXISTS '$MYSQL_NORMAL_USER'@'%' IDENTIFIED BY '$MYSQL_NORMAL_PASSWORD';"
+mysql -uroot -e "GRANT ALL PRIVILEGES ON *.* TO '$MYSQL_ADMIN_USER'@'%';"
+mysql -uroot -e "GRANT ALL PRIVILEGES ON $MYSQL_DATABASE.* TO '$MYSQL_NORMAL_USER'@'%';"
 mysql -uroot -e "FLUSH PRIVILEGES;"
 
+# Update root password
+# mysql -uroot -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '$MYSQL_ROOT_PASSWORD';"
+
+# https://www.digitalocean.com/community/tutorials/how-to-migrate-a-mysql-database-between-two-servers
+# Creating already made database for wordpress if it doesn't already exists
+# DB=$(mysql -uroot --password=$MYSQL_ROOT_PASSWORD -e "USE $MYSQL_DATABASE; SHOW TABLES;")
+DB=$(mysql -uroot -e "USE $MYSQL_DATABASE; SHOW TABLES;")
+if ["$DB" -eq ""]
+then
+    # mysql -uroot --password=$MYSQL_ROOT_PASSWORD $MYSQL_DATABASE < /wordpress_database.sql
+    mysql -uroot $MYSQL_DATABASE < /wordpress_database.sql
+fi
 service mysql stop
 
 # Deamonize
-/usr/bin/mysqld_safe --skip-networking=off
+mysqld -uroot --skip-networking=off
+# mysqld -uroot --password=$MYSQL_ROOT_PASSWORD --skip-networking=off

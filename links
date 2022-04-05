@@ -21,3 +21,5 @@ https://www.digitalocean.com/community/tutorials/how-to-install-mariadb-on-debia
 WORDPRESS CONFIG
 https://www.hostinger.com/tutorials/run-docker-wordpress
 https://www.digitalocean.com/community/tutorials/how-to-install-wordpress-with-docker-compose
+
+mariadb -u root wordpress < ./wordpress-5.7.16-clean.sql
