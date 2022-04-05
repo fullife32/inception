@@ -23,7 +23,7 @@ COPY ./conf/www.conf /etc/php/7.3/fpm/pool.d/www.conf
 # SET VOLUME
 VOLUME /var/www/wordpress
 
-# CONFIG CONNECTION
+# ADD PERMISSIONS
 RUN chown -R www-data:www-data /var/www/wordpress/
 RUN mkdir -p /run/php/
 
