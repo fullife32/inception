@@ -13,11 +13,10 @@
 all:
 	mkdir -p /home/eithan/data/wordpress_website
 	mkdir -p /home/eithan/data/wordpress_database
-	sudo docker-compose -f ./srcs/docker-compose.yml up --build
-# -d to detach
+	sudo docker-compose -f ./srcs/docker-compose.yml up -d --build
+
 down:
 	sudo docker-compose -f ./srcs/docker-compose.yml down
-# Need to rework here to delete virtual volumes and check curl 443 vm fix ?
 
 # ----------------- #
 #       CLEAN       #
@@ -25,8 +24,8 @@ down:
 
 clean:
 	sudo docker-compose -f ./srcs/docker-compose.yml down --volumes
-	sudo rm -rf /home/eithan/data/wordpress_website
-	sudo rm -rf /home/eithan/data/wordpress_database
+	sudo rm -rf /home/eithan/data
+	sudo docker network prune -f
 
 fclean: clean
 	sudo docker system prune -af

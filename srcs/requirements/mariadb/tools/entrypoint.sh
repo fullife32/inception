@@ -1,13 +1,10 @@
 #!/bin/sh
 
-# First installation
-# mysql_install_db
-
 # Starting mysql
 service mysql start
 sleep 2
 
-# Creating database and add an admin user and a user
+# Creating database and add an admin user
 mysql -uroot -e "CREATE DATABASE IF NOT EXISTS $MYSQL_DATABASE;"
 mysql -uroot -e "CREATE USER IF NOT EXISTS '$MYSQL_ADMIN_USER'@'%' IDENTIFIED BY '$MYSQL_ADMIN_PASSWORD';"
 mysql -uroot -e "GRANT ALL PRIVILEGES ON *.* TO '$MYSQL_ADMIN_USER'@'%';"
