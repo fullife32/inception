@@ -9,7 +9,7 @@ RUN apt-get update && apt-get install mariadb-server mariadb-client procps -y
 COPY ./tools/* /
 
 # SETUP WORDPRESS ALREADY MADE DATABASE
-COPY ./conf/wordpress_database.sql /
+COPY ./conf/database.sql /
 
 # CONFIG TO OPEN PORT
 RUN rm /etc/mysql/mariadb.conf.d/50-server.cnf

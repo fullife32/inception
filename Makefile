@@ -23,8 +23,8 @@ down:
 #       CLEAN       #
 # ----------------- #
 
-clean: down
-	sudo docker volume prune -f
+clean:
+	sudo docker-compose -f ./srcs/docker-compose.yml down --volumes
 	sudo rm -rf /home/eithan/data/wordpress_website
 	sudo rm -rf /home/eithan/data/wordpress_database
 
